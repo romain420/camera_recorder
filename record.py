@@ -54,7 +54,7 @@ class Recorder:
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             return fourcc
         else:
-            print(f"Sorry but format '{self.format}' is not supported yet")
+            print(f"Error: Format '{self.format}' is not supported")
 
     def periph_choice(self):
         pass # TODO write method to find the go video peripheric to record video
@@ -62,7 +62,7 @@ class Recorder:
     def record(self):
         cap = cv2.VideoCapture(0)
 
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')#source_format(self)
+        fourcc = Recorder.source_format(self)#cv2.VideoWriter_fourcc(*'mp4v')#
         out = cv2.VideoWriter(f"{self.path}/output.mp4", fourcc, self.fps, (self.width, self.height))
 
         while (cap.isOpened()):
