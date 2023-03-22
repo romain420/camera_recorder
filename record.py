@@ -1,38 +1,6 @@
 import cv2
 import os
-
-# Open the default camera (usually 0) and set the video size
-# cap = cv2.VideoCapture(0)
-# # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-# # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-#
-# print(cap)
-#
-# # Define the codec and create VideoWriter object
-# fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-# out = cv2.VideoWriter('./outputs/output.mp4', fourcc, 20.0, (640, 480))
-#
-# while(cap.isOpened()):
-#     # Capture frame-by-frame
-#     ret, frame = cap.read()
-#
-#     if ret==True:
-#         # Write the frame into the output video file
-#         out.write(frame)
-#
-#         # Display the resulting frame
-#         cv2.imshow('Cam Recording',frame)
-#
-#         # Press 'q' to exit the loop
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#     else:
-#         break
-#
-# # Release everything when the job is finished
-# cap.release()
-# out.release()
-# cv2.destroyAllWindows()
+from datetime import datetime
 
 class Recorder:
     def __init__(self, width: int, height: int, path: str, fps: float, format: str, device: int):
@@ -72,7 +40,7 @@ class Recorder:
         return arr# TODO write method to find the go video peripheric to record video
 
     def record(self):
-        cap = cv2.VideoCapture(device)
+        cap = cv2.VideoCapture(self.device)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
         cap.set(cv2.CAP_PROP_FPS, self.fps)
@@ -86,8 +54,10 @@ class Recorder:
         print(f"\tHeight: {height}")
         print(f"\tFPS: {fps}")
 
+        current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+
         fourcc = Recorder.source_format(self)#cv2.VideoWriter_fourcc(*'mp4v')#
-        out = cv2.VideoWriter(f"{self.path}/output.mp4", fourcc, fps, (int(width), int(height)))
+        out = cv2.VideoWriter(f"{self.path}/video_{current_time}.mp4", fourcc, fps, (int(width), int(height)))
 
         while (cap.isOpened()):
             # Capture frame-by-frame
