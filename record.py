@@ -35,12 +35,13 @@ import os
 # cv2.destroyAllWindows()
 
 class Recorder:
-    def __init__(self, width: int, height: int, path: str, fps: float, format: str):
+    def __init__(self, width: int, height: int, path: str, fps: float, format: str, device: int):
         self.width = width
         self.height = height
         self.path = path
         self.fps = fps
         self.format = format
+        self.device = device
 
     def check_dir(self):
         if os.path.isdir(self.path):
@@ -71,7 +72,7 @@ class Recorder:
         return arr# TODO write method to find the go video peripheric to record video
 
     def record(self):
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(device)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
         cap.set(cv2.CAP_PROP_FPS, self.fps)

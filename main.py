@@ -6,6 +6,7 @@ if __name__ == '__main__':
                         height=720,
                         path='./outputs',
                         format='mp4',
-                        fps=15)
+                        fps=15,
+                        device=0)
     recorder.check_dir()
     recorder.record()
