@@ -1,32 +1,88 @@
 import cv2
+import os
 
 # Open the default camera (usually 0) and set the video size
-cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+# cap = cv2.VideoCapture(0)
+# # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+# # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+#
+# print(cap)
+#
+# # Define the codec and create VideoWriter object
+# fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+# out = cv2.VideoWriter('./outputs/output.mp4', fourcc, 20.0, (640, 480))
+#
+# while(cap.isOpened()):
+#     # Capture frame-by-frame
+#     ret, frame = cap.read()
+#
+#     if ret==True:
+#         # Write the frame into the output video file
+#         out.write(frame)
+#
+#         # Display the resulting frame
+#         cv2.imshow('Cam Recording',frame)
+#
+#         # Press 'q' to exit the loop
+#         if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
+#     else:
+#         break
+#
+# # Release everything when the job is finished
+# cap.release()
+# out.release()
+# cv2.destroyAllWindows()
 
-# Define the codec and create VideoWriter object
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-out = cv2.VideoWriter('./outputs/output.mp4', fourcc, 20.0, (640, 480))
+class Recorder:
+    def __init__(self, width: int, height: int, path: str, fps: float, format: str):
+        self.width = width
+        self.height = height
+        self.path = path
+        self.fps = fps
+        self.format = format
 
-while(cap.isOpened()):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
+    def check_dir(self):
+        if os.path.isdir(self.path):
+            print("This directory exist")
+        else:
+            os.mkdir(self.path)
+            print("Directory successfully created")
 
-    if ret==True:
-        # Write the frame into the output video file
-        out.write(frame)
+    def source_format(self):
+        if self.format == "mp4":
+            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            return fourcc
+        else:
+            print(f"Sorry but format '{self.format}' is not supported yet")
 
-        # Display the resulting frame
-        cv2.imshow('Cam Recording',frame)
+    def periph_choice(self):
+        pass # TODO write method to find the go video peripheric to record video
 
-        # Press 'q' to exit the loop
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    else:
-        break
+    def record(self):
+        cap = cv2.VideoCapture(0)
 
-# Release everything when the job is finished
-cap.release()
-out.release()
-cv2.destroyAllWindows()
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')#source_format(self)
+        out = cv2.VideoWriter(f"{self.path}/output.mp4", fourcc, self.fps, (self.width, self.height))
+
+        while (cap.isOpened()):
+            # Capture frame-by-frame
+            ret, frame = cap.read()
+            if ret == True:
+                # Write the frame into the output video file
+                out.write(frame)
+
+                # Display the resulting frame
+                cv2.imshow('Cam Recording', frame)
+
+                # Press 'q' to exit the loop
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    break
+
+            else:
+                break
+
+        # Release everything when the job is finished
+        cap.release()
+        out.release()
+        cv2.destroyAllWindows()
