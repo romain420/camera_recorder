@@ -49,6 +49,11 @@ class Recorder:
         height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         fps = cap.get(cv2.CAP_PROP_FPS)
 
+        # Date text setup
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        scale = 1
+        color = (0, 161, 255)
+
         print("Video property:")
         print(f"\tWidth: {width}")
         print(f"\tHeight: {height}")
@@ -63,6 +68,10 @@ class Recorder:
             # Capture frame-by-frame
             ret, frame = cap.read()
             if ret == True:
+                # Set date and hours
+                current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                cv2.putText(frame, current_time, (0, 25), font, scale, color, 2)
+
                 # Write the frame into the output video file
                 out.write(frame)
 
