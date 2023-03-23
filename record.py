@@ -52,7 +52,7 @@ class Recorder:
         # Date text setup
         font = cv2.FONT_HERSHEY_SIMPLEX
         scale = 1
-        color = (0, 161, 255)
+        color = (0, 168, 0)
 
         print("Video property:")
         print(f"\tWidth: {width}")

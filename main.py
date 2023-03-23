@@ -2,8 +2,8 @@ from record import Recorder
 
 if __name__ == '__main__':
     print('hey')
-    recorder = Recorder(width=1280,
-                        height=720,
+    recorder = Recorder(width=1920,
+                        height=1080,
                         path='./outputs',
                         format='mp4',
                         fps=15,
