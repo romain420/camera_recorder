@@ -1,6 +1,7 @@
 import cv2
 import os
 from datetime import datetime
+import psutil
 
 class Recorder:
     def __init__(self, width: int, height: int, path: str, fps: float, format: str, device: int):
@@ -25,6 +26,20 @@ class Recorder:
             return fourcc
         else:
             print(f"Error: Format '{self.format}' is not supported")
+
+    def check_space(self):
+        disk = psutil.disk_usage('/')
+        free_space = disk.free/(1024**3)
+        print("\nCheck free space on disk:")
+        if free_space > 50:
+            print(f"\tFree space on disk: {free_space:.2f} GB")
+            return True
+        else:
+            print("⚠ ERROR: Not enough space ⚠")
+            print(f"\tOnly free space on disk: {free_space:.2f} GB")
+            print(f"\t⚠ Please make some space on your disk. You should get more than 50 Go of free space ⚠")
+            return False
+
 
     def periph_choice(self):
         # checks the first 10 indexes.
