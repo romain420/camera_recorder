@@ -12,11 +12,12 @@ class Recorder:
         self.device = device
 
     def check_dir(self):
+        print("Check directory:")
         if os.path.isdir(self.path):
-            print("This directory exist")
+            print("\tThis directory exist\n")
         else:
             os.mkdir(self.path)
-            print("Directory successfully created")
+            print("\tDirectory successfully created\n")
 
     def source_format(self):
         if self.format == "mp4":

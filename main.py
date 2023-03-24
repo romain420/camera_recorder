@@ -18,6 +18,8 @@ def parse_args():
 
 if __name__ == '__main__':
     start_time = datetime.now()
+    time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"⚠ The record start at: {time_str} ⚠\n")
     print('hey')
     args = parse_args()
     if args.show_device == True:
@@ -43,4 +45,6 @@ if __name__ == '__main__':
 
         stop_time = datetime.now()
         delta_time = stop_time - start_time
-        print(f"Execution time: {delta_time}")
+        print(f"\nExecution time: {delta_time}")
+        time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"End of video recording: {time_str}")
