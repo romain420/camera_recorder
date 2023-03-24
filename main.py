@@ -20,7 +20,14 @@ if __name__ == '__main__':
     start_time = datetime.now()
     time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"⚠ The record start at: {time_str} ⚠\n")
-    print('hey')
+    print("""
+                                                           _
+                                                          | |
+           ___ __ _ _ __ ___    _ __ ___  ___ ___  _ __ __| | ___ _ __
+          / __/ _' | '_ ' _ \  | '__/ _ \/ __/ _ \| '__/ _' |/ _ \ '__|
+         | (_| (_| | | | | | | | | |  __/ (_| (_) | | | (_| |  __/ |
+          \___\__,_|_| |_| |_| |_|  \___|\___\___/|_|  \__,_|\___|_|
+    """)
     args = parse_args()
     if args.show_device == True:
         returnUsedevice()
