@@ -1,6 +1,7 @@
 from record import Recorder
 from periph_check_test import returnUsedevice
 import argparse
+from datetime import datetime
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -16,6 +17,7 @@ def parse_args():
     return args
 
 if __name__ == '__main__':
+    start_time = datetime.now()
     print('hey')
     args = parse_args()
     if args.show_device == True:
@@ -38,3 +40,7 @@ if __name__ == '__main__':
                             device=0)
         recorder.check_dir()
         recorder.record()
+
+        stop_time = datetime.now()
+        delta_time = stop_time - start_time
+        print(f"Execution time: {delta_time}")
