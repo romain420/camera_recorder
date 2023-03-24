@@ -60,6 +60,7 @@ class Recorder:
         print(f"\tFPS: {fps}")
 
         current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        video_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         fourcc = Recorder.source_format(self)#cv2.VideoWriter_fourcc(*'mp4v')#
         out = cv2.VideoWriter(f"{self.path}/video_{current_time}.mp4", fourcc, fps, (int(width), int(height)))
@@ -76,7 +77,7 @@ class Recorder:
                 out.write(frame)
 
                 # Display the resulting frame
-                cv2.imshow('Cam Recording', frame)
+                cv2.imshow(f"Cam Recording start: {video_time}", frame)
 
                 # Press 'q' to exit the loop
                 if cv2.waitKey(1) & 0xFF == ord('q'):
