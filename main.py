@@ -40,8 +40,9 @@ if __name__ == '__main__':
                             format='mp4',
                             fps=15,
                             device=0)
-        recorder.check_dir()
-        recorder.record()
+        if recorder.check_space():
+            recorder.check_dir()
+            recorder.record()
 
         stop_time = datetime.now()
         delta_time = stop_time - start_time
