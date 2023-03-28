@@ -21,8 +21,8 @@ class Recorder:
             print("\tDirectory successfully created\n")
 
     def source_format(self):
-        if self.format == "mp4":
-            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        if self.format == "MJPG":
+            fourcc = cv2.VideoWriter_fourcc(*'MJPG')
             return fourcc
         else:
             print(f"Error: Format '{self.format}' is not supported")
@@ -57,10 +57,12 @@ class Recorder:
 
     def record(self):
         cap = cv2.VideoCapture(self.device)
+        cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
         cap.set(cv2.CAP_PROP_FPS, self.fps)
 
+        format = cap.get(cv2.CAP_PROP_FORMAT)
         width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         fps = cap.get(cv2.CAP_PROP_FPS)
@@ -74,12 +76,13 @@ class Recorder:
         print(f"\tWidth: {width}")
         print(f"\tHeight: {height}")
         print(f"\tFPS: {fps}")
+        print(f"\tFormat: {format}")
 
         current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         video_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         fourcc = Recorder.source_format(self)#cv2.VideoWriter_fourcc(*'mp4v')#
-        out = cv2.VideoWriter(f"{self.path}/video_{current_time}.mp4", fourcc, fps, (int(width), int(height)))
+        out = cv2.VideoWriter(f"{self.path}/video_{current_time}.avi", fourcc, fps, (int(width), int(height)))
 
         while (cap.isOpened()):
             # Capture frame-by-frame
