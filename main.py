@@ -40,11 +40,11 @@ if __name__ == '__main__':
         #                     device=args.device)
         # recorder.check_dir()
         # recorder.record()
-        recorder = Recorder(width=1920,
-                            height=1080,
+        recorder = Recorder(width=1280,
+                            height=720,
                             path='./outputs',
-                            format='mp4',
-                            fps=15,
+                            format='MJPG',
+                            fps=30,
                             device=0)
         if recorder.check_space():
             recorder.check_dir()
