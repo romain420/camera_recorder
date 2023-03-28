@@ -20,8 +20,7 @@ if __name__ == '__main__':
     start_time = datetime.now()
     time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"⚠ The record start at: {time_str} ⚠\n")
-    print("""
-                                                           _
+    print("""                                                           _
                                                           | |
            ___ __ _ _ __ ___    _ __ ___  ___ ___  _ __ __| | ___ _ __
           / __/ _' | '_ ' _ \  | '__/ _ \/ __/ _ \| '__/ _' |/ _ \ '__|
